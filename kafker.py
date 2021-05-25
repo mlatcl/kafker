@@ -92,6 +92,26 @@ async def get_count(web, request, author):
     )
 
 
+@app.page("/followers/{author}/")
+@app.table_route(table=followers, match_info="author")
+async def get_count(web, request, author):
+    return web.json(
+        {
+            author: list(followers[author]),
+        }
+    )
+
+
+@app.page("/followings/{author}/")
+@app.table_route(table=followings, match_info="author")
+async def get_count(web, request, author):
+    return web.json(
+        {
+            author: list(followings[author]),
+        }
+    )
+
+
 @app.command(
     faust.cli.option("-a", "--active", type=str, required=True),
     faust.cli.option("-p", "--passive", type=str, required=True),
