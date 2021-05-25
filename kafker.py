@@ -74,7 +74,7 @@ async def get_count(web, request, author):
     faust.cli.option("--follow/--unfollow", default=True),
 )
 async def follow(self, active, passive, follow):
-    """Post a new keet."""
+    """Follow or unfollow somebody."""
     await follows.send(
         value=Follow(
             active_author=active,
