@@ -3,9 +3,11 @@ import itertools as it
 from typing import List, Set
 import faust
 import faust.cli
+import uuid
 
 
 class Keet(faust.Record):
+    uid: str
     author: str
     text: str
     timestamp: int = 0
@@ -27,16 +29,21 @@ new_keets = app.topic("new_keets", value_type=Keet)
 follows = app.topic("follows", value_type=Follow)
 timeline_rebuilds = app.topic("timeline_rebuild", value_type=str)
 
-keets = app.Table("keets", default=list)
+keets = app.Table("keets", key_type=str, value_type=Keet)
+keets_by_author = app.SetTable(
+    "keets_by_author", key_type=str, value_type=Set[str], default=set
+)
+
 timelines = app.Table("timelines", default=list)
-followings = app.SetTable("followings", default=set)
-followers = app.SetTable("followers", default=set)
+followings = app.SetTable("followings", key_type=str, value_type=Set[str], default=set)
+followers = app.SetTable("followers", key_type=str, value_type=Set[str], default=set)
 
 
 @app.agent(incoming_keets, sink=[new_keets])
 async def process_incoming_keets(incoming_keets):
     async for keet in incoming_keets:
         yield Keet(
+            uid=keet.uid,
             author=keet.author,
             text=keet.text,
             timestamp=int(datetime.now().timestamp()),
@@ -46,18 +53,11 @@ async def process_incoming_keets(incoming_keets):
 @app.agent(new_keets)
 async def persist_keet(new_keets):
     async for keet in new_keets.group_by(Keet.author):
-        author_keets = keets[keet.author]
-        author_keets.append(keet)
-        keets[keet.author] = author_keets
+        keets[keet.uid] = keet
+        keets_by_author[keet.author].add(keet.uid)
 
-
-@app.agent(new_keets)
-async def append_timelines_with_new_keets(new_keets):
-    async for keet in new_keets.group_by(Keet.author):
-        for author in {keet.author, *followers[keet.author]}:
-            timeline = timelines[author]
-            timeline.append(keet)
-            timelines[author] = timeline
+        for interested in (keet.author, *followers[keet.author]):
+            timeline_rebuilds.send_soon(value=interested)
 
 
 @app.agent(follows)
@@ -70,15 +70,20 @@ async def process_follows(follows):
             followings[follow.active_author].discard(follow.passive_author)
             followers[follow.passive_author].discard(follow.active_author)
 
-        await timeline_rebuilds.send(value=follow.active_author)
+        timeline_rebuilds.send_soon(value=follow.active_author)
 
 
 @app.agent(timeline_rebuilds)
 async def rebuild_timeline(timeline_rebuilds):
     async for author in timeline_rebuilds.group_by(lambda x: x, name="by-author"):
         timelines[author] = sorted(
-            it.chain(*(keets[athr] for athr in {author, *followings[author]})),
-            key=lambda keet: keet.timestamp,
+            it.chain(
+                *(
+                    keets_by_author[athr]
+                    for athr in {author, *followings[author]}
+                )
+            ),
+            key=lambda keet_id: keets[keet_id].timestamp,
         )
 
 
@@ -87,7 +92,7 @@ async def rebuild_timeline(timeline_rebuilds):
 async def get_count(web, request, author):
     return web.json(
         {
-            author: timelines[author],
+            author: [keets[keet_id] for keet_id in timelines[author]],
         }
     )
 
@@ -136,6 +141,7 @@ async def post(self, author, text):
     """Post a new keet."""
     await incoming_keets.send(
         value=Keet(
+            uid=str(uuid.uuid1()),
             author=author,
             text=text,
         )
