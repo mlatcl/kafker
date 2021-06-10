@@ -11,6 +11,10 @@ faust = "^1.10.4"
 [tool.poetry.dev-dependencies]
 black = "^21.5b1"
 ipython = "^7.23.1"
+isort = "^5.8.0"
+
+[tool.isort]
+profile = "black"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
