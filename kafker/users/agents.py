@@ -20,16 +20,26 @@ async def create_user(registers):
 
 
 @app.agent(follows)
-async def process_follows(follows):
+async def process_active(follows):
     async for follow in follows.group_by(Follow.active_author):
         active = follow.active_author
         passive = follow.passive_author
 
         if follow.follow:
             followings[active].add(passive)
-            followers[passive].add(active)
         else:
             followings[active].discard(passive)
-            followers[passive].discard(active)
 
         await timeline_rebuilds.send(value=active)
+
+
+@app.agent(follows)
+async def process_follows_passive(follows):
+    async for follow in follows.group_by(Follow.passive_author):
+        active = follow.active_author
+        passive = follow.passive_author
+
+        if follow.follow:
+            followers[passive].add(active)
+        else:
+            followers[passive].discard(active)
