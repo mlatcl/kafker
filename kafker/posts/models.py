@@ -27,7 +27,7 @@ class Timeline(faust.Record, coerce=True):
 incoming_posts = app.topic("incoming_posts", internal=True, value_type=IncomingPost)
 new_posts = app.topic("new_posts", internal=True, value_type=Post)
 posts = app.Table("posts", value_type=Post)
-posts_by_author = app.SetGlobalTable("posts_by_author", value_type=str, default=set)
+posts_by_author = app.SetTable("posts_by_author", value_type=UID, default=set)
 
 timeline_rebuilds = app.topic("timeline_rebuilds", internal=True, value_type=str)
-timelines = app.GlobalTable("timelines", value_type=Timeline, default=Timeline)
+timelines = app.Table("timelines", value_type=Timeline, default=Timeline)
