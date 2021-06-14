@@ -1,4 +1,12 @@
 [[package]]
+name = "aioconsole"
+version = "0.3.1"
+description = "Asynchronous console and interfaces for asyncio"
+category = "dev"
+optional = false
+python-versions = ">=3.6"
+
+[[package]]
 name = "aiohttp"
 version = "3.7.4.post0"
 description = "Async http client/server framework (asyncio)"
@@ -27,6 +35,18 @@ python-versions = "*"
 
 [package.dependencies]
 aiohttp = ">=1.1"
+
+[[package]]
+name = "aiomonitor"
+version = "0.4.5"
+description = "aiomonitor adds monitor and python REPL capabilities for asyncio application"
+category = "dev"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+aioconsole = "*"
+terminaltables = "*"
 
 [[package]]
 name = "appdirs"
@@ -517,9 +537,12 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "edb46ba732d962da29c86c7e7df077cf9cddd8a3b30a09587371fcacd14b93b2"
+content-hash = "1f3a16384b32ae4a61aa039a8d0c023dc9cc934567e6a996cd9f73fe57dc413d"
 
 [metadata.files]
+aioconsole = [
+    {file = "aioconsole-0.3.1.tar.gz", hash = "sha256:7c038bb40b7690bf5be6b17154830b7bff25e7be1c02d8420a346c3efbd5d8e5"},
+]
 aiohttp = [
     {file = "aiohttp-3.7.4.post0-cp36-cp36m-macosx_10_14_x86_64.whl", hash = "sha256:3cf75f7cdc2397ed4442594b935a11ed5569961333d49b7539ea741be2cc79d5"},
     {file = "aiohttp-3.7.4.post0-cp36-cp36m-manylinux1_i686.whl", hash = "sha256:4b302b45040890cea949ad092479e01ba25911a15e648429c7c5aae9650c67a8"},
@@ -562,6 +585,10 @@ aiohttp = [
 aiohttp-cors = [
     {file = "aiohttp-cors-0.7.0.tar.gz", hash = "sha256:4d39c6d7100fd9764ed1caf8cebf0eb01bf5e3f24e2e073fda6234bc48b19f5d"},
     {file = "aiohttp_cors-0.7.0-py3-none-any.whl", hash = "sha256:0451ba59fdf6909d0e2cd21e4c0a43752bc0703d33fc78ae94d9d9321710193e"},
+]
+aiomonitor = [
+    {file = "aiomonitor-0.4.5-py3-none-any.whl", hash = "sha256:5c7ac38b2ee59cbad87162ef5c45d72c7b57b94c8a93e7f462184bf10f9ebccd"},
+    {file = "aiomonitor-0.4.5.tar.gz", hash = "sha256:6232c1ab14bf06cd7217845801c27340032f74e283bdaf32d01cdd3b7c673d0e"},
 ]
 appdirs = [
     {file = "appdirs-1.4.4-py2.py3-none-any.whl", hash = "sha256:a841dacd6b99318a741b166adb07e19ee71a274450e68237b4650ca1055ab128"},

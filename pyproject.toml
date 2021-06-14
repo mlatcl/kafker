@@ -12,6 +12,7 @@ faust = "^1.10.4"
 black = "^21.5b1"
 ipython = "^7.23.1"
 isort = "^5.8.0"
+aiomonitor = "^0.4.5"
 
 [tool.isort]
 profile = "black"
