@@ -1,5 +1,3 @@
-import faust
-
 from kafker.app import app
 from kafker.learning.models import (
     Bigram,
@@ -12,7 +10,7 @@ from kafker.posts.models import Post, new_posts
 
 
 @app.agent(new_posts, sink=[new_texts])
-async def build_ngrams(new_posts):
+async def submit_text(new_posts):
     async for post in new_posts.group_by(Post.author):
         yield post.text
 
