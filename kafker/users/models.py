@@ -1,5 +1,3 @@
-from typing import Set
-
 import faust
 
 from kafker.app import app
@@ -22,5 +20,5 @@ follows = app.topic("follows", internal=True, value_type=Follow)
 
 authors = app.GlobalTable("authors", key_type=str, value_type=Author)
 
-followings = app.SetTable("followings", value_type=Set[str], default=set)
-followers = app.SetTable("followers", value_type=Set[str], default=set)
+followings = app.SetTable("followings", value_type=str, default=set)
+followers = app.SetTable("followers", value_type=str, default=set)

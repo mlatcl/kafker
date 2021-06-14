@@ -1,15 +1,15 @@
 import kafker
 from kafker.app import app
+from kafker.posts.models import timeline_rebuilds
 from kafker.users.models import (
     Author,
-    authors,
     Follow,
+    authors,
     followers,
     followings,
     follows,
     registers,
 )
-from kafker.posts.models import timeline_rebuilds
 
 
 @app.agent(registers)
