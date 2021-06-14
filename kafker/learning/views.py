@@ -5,7 +5,7 @@ import click
 import faust.cli
 
 from kafker.app import app
-from kafker.learning.models import bigram_weights, bigrams
+from kafker.learning.models import Bigram, bigram_weights, bigrams
 
 
 @app.page("/generate/")
@@ -15,7 +15,7 @@ async def generate_post(web, request, length=50):
         while True:
             next_words = list(bigrams[current])
             next_weights = [
-                bigram_weights[current, next_word] for next_word in next_words
+                bigram_weights[Bigram(current, next_word)] for next_word in next_words
             ]
             if not next_words:
                 return

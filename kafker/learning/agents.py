@@ -28,4 +28,4 @@ async def build_ngrams(new_texts):
 async def persist_bigrams(new_bigrams):
     async for bigram in new_bigrams:
         bigrams[bigram.lhs].add(bigram.rhs)
-        bigram_weights[bigram.lhs, bigram.rhs] += 1
+        bigram_weights[bigram] += 1
