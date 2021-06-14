@@ -7,6 +7,6 @@ from kafker.posts.models import posts, timelines
 async def timeline(web, request, author):
     return web.json(
         {
-            author: [posts[post_id] for post_id in timelines[author]],
+            author: [posts[post_id.uid] for post_id in timelines[author].posts],
         }
     )
