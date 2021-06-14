@@ -5,7 +5,7 @@ description = ""
 authors = ["Markus Kaiser <mk2092@cam.ac.uk>"]
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.7"
 faust = "^1.10.4"
 
 [tool.poetry.dev-dependencies]
