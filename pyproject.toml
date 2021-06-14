@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "kafker"
 version = "0.1.0"
-description = ""
+description = "A tiny Kafka-driven text publishing social network service."
 authors = ["Markus Kaiser <mk2092@cam.ac.uk>"]
 
 [tool.poetry.dependencies]
