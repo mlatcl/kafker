@@ -2,7 +2,7 @@ import faust.cli
 
 from kafker.app import app
 from kafker.models import UID
-from kafker.users.models import Author, Follow, authors_by_name, follows, registers
+from kafker.users.models import Author, Follow, follows, registers
 
 
 @app.command(

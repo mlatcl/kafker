@@ -1,6 +1,5 @@
 from kafker.app import app
 from kafker.posts.models import posts, timelines
-from kafker.users.models import authors_by_name
 
 
 @app.page("/timeline/{author}/")
@@ -8,6 +7,6 @@ from kafker.users.models import authors_by_name
 async def timeline(web, request, author):
     return web.json(
         {
-            author: [posts[post_id] for post_id in timelines[authors_by_name[author]]],
+            author: [posts[post_id] for post_id in timelines[author]],
         }
     )

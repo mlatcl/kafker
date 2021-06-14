@@ -20,8 +20,7 @@ class Follow(faust.Record):
 registers = app.topic("registers", internal=True, value_type=Author)
 follows = app.topic("follows", internal=True, value_type=Follow)
 
-authors = app.Table("authors", key_type=UID, value_type=Author)
-authors_by_name = app.Table("authors_by_name", key_type=str, value_type=UID)
+authors = app.GlobalTable("authors", key_type=str, value_type=Author)
 
-followings = app.SetTable("followings", key_type=UID, value_type=Set[UID], default=set)
-followers = app.SetTable("followers", key_type=UID, value_type=Set[UID], default=set)
+followings = app.SetTable("followings", value_type=Set[str], default=set)
+followers = app.SetTable("followers", value_type=Set[str], default=set)
