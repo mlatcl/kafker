@@ -12,5 +12,5 @@ class Bigram(faust.Record, coerce=True):
 
 new_texts = app.topic("new_texts", internal=True, value_type=str)
 new_bigrams = app.topic("new_bigrams", internal=True, value_type=Bigram)
-bigrams = app.SetTable("bigrams", key_type=str, value_type=str, default=set)
-bigram_weights = app.Table("bigram_weights", value_type=int, default=int)
+bigrams = app.SetGlobalTable("bigrams", key_type=str, value_type=str, default=set)
+bigram_weights = app.GlobalTable("bigram_weights", value_type=int, default=int)
