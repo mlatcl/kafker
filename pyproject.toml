@@ -2,7 +2,7 @@
 name = "kafker"
 version = "0.1.0"
 description = ""
-authors = ["Markus Kaiser <markus.kaiser@siemens.com>"]
+authors = ["Markus Kaiser <mk2092@cam.ac.uk>"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
