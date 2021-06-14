@@ -1,6 +1,5 @@
 from kafker.app import app
 from kafker.learning.models import (
-    Bigram,
     bigram_weights,
     bigrams,
     new_bigrams,
@@ -21,11 +20,11 @@ async def build_ngrams(new_texts):
         words = text.split(" ")
         words = [word for word in words if word]
         for bigram in zip(["^", *words], words):
-            yield Bigram(*bigram)
+            yield bigram
 
 
 @app.agent(new_bigrams)
 async def persist_bigrams(new_bigrams):
-    async for bigram in new_bigrams:
-        bigrams[bigram.lhs].add(bigram.rhs)
-        bigram_weights[bigram] += 1
+    async for lhs, rhs in new_bigrams:
+        bigrams[lhs].add(rhs)
+        bigram_weights[lhs, rhs] += 1
