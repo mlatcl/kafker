@@ -6,7 +6,7 @@ authors = ["Markus Kaiser <mk2092@cam.ac.uk>"]
 
 [tool.poetry.dependencies]
 python = "^3.7"
-faust = "^1.10.4"
+faust = {version = "^1.10.4", extras = ["fast", "uvloop"]}
 
 [tool.poetry.dev-dependencies]
 black = "^21.5b1"
