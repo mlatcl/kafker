@@ -19,8 +19,8 @@ async def submit_text(new_posts):
 async def build_ngrams(new_texts):
     async for text in new_texts:
         words = text.split(" ")
-        words = ["^", *words]
-        for bigram in zip(words, words[1:]):
+        words = [word for word in words if word]
+        for bigram in zip(["^", *words], words):
             yield Bigram(*bigram)
 
 
