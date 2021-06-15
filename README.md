@@ -90,3 +90,12 @@ You need to install the hooks from within a poetry shell and commit from within 
 ```shell
 $ pre-commit install
 ```
+You can manually run the checks on all changed files
+```shell
+$ pre-commit run
+```
+or on all files
+```shell
+$ pre-commit run -a
+```
+Your editor can probably be configured to at least run isort and black in regular intervals.
