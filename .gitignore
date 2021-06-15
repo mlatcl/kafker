@@ -1,3 +1,11 @@
+# NOTE(mrksr): Faust/Kafka files
+docker/zk-single-kafka-single
+kafker-data
+
+# Local input files
+data/
+
+# NOTE(mrksr): Github's Python ignore file following below
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
