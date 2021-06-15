@@ -13,6 +13,8 @@ black = "^21.5b1"
 ipython = "^7.23.1"
 isort = "^5.8.0"
 aiomonitor = "^0.4.5"
+pre-commit = "^2.13.0"
+pylint = "^2.8.3"
 
 [tool.isort]
 profile = "black"
