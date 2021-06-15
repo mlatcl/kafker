@@ -1,0 +1,21 @@
+[MASTER]
+ignore-patterns=_prototyping
+
+
+[MESSAGES CONTROL]
+disable=bad-continuation,
+        missing-module-docstring,
+        missing-class-docstring,
+        missing-function-docstring,
+        import-error,
+        no-value-for-parameter,
+        fixme,
+        too-many-arguments,
+        redefined-argument-from-local,
+        redefined-outer-name,
+        invalid-name,
+        too-few-public-methods,
+        unused-argument,
+        # NOTE(mrksr): Black compatibility
+        C0330,
+        C0326,

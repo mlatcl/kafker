@@ -82,3 +82,11 @@ Or add some posts to the system:
 $ python -m kafker register -n trump
 $ shuf -n 23 trump_tweets.txt | tr "\n" "\0" | xargs -0 -P 10 -IX python -m kafker post -a trump -t X
 ```
+
+## Developing
+This repo uses [black](https://github.com/psf/black) and [isort](https://pycqa.github.io/isort/) for code formatting and [pylint](https://pylint.org/) for linting.
+To easily ensure that code changes conform to the style requirements, you can use `pre-commit` to automatically run checks before every commit.
+You need to install the hooks from within a poetry shell and commit from within a poetry shell as well:
+```shell
+$ pre-commit install
+```
