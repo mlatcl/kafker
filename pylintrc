@@ -3,7 +3,8 @@ ignore-patterns=_prototyping
 
 
 [MESSAGES CONTROL]
-disable=bad-continuation,
+disable=abstract-method,
+        bad-continuation,
         missing-module-docstring,
         missing-class-docstring,
         missing-function-docstring,
