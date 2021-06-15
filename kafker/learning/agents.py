@@ -1,10 +1,5 @@
 from kafker.app import app
-from kafker.learning.models import (
-    bigram_weights,
-    bigrams,
-    new_bigrams,
-    new_texts,
-)
+from kafker.learning.models import bigram_weights, bigrams, new_bigrams, new_texts
 from kafker.posts.models import Post, new_posts
 
 

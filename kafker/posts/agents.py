@@ -1,17 +1,15 @@
 import itertools as it
 from datetime import datetime
 
-import faust
-
 from kafker.app import app
 from kafker.posts.models import (
     IncomingPost,
     Post,
+    Timeline,
     incoming_posts,
     new_posts,
     posts,
     posts_by_author,
-    Timeline,
     timeline_rebuilds,
     timelines,
 )

@@ -1,7 +1,4 @@
-from typing import Tuple
-
 from kafker.app import app
-
 
 new_texts = app.topic("new_texts", internal=True, value_type=str)
 new_bigrams = app.topic("new_bigrams", internal=True)
