@@ -1,0 +1,25 @@
+name: Run pre-commit hooks
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.7, 3.8, 3.9]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dev-environment
+        run: |
+          pip install poetry
+          poetry install
+          poetry run pre-commit install
+      - name: Run checks
+        run: |
+          poetry run pre-commit run -a
