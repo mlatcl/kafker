@@ -2,7 +2,7 @@ import itertools as it
 import random
 
 from kafker.app import app
-from kafker.learning.models import bigram_weights, bigrams
+from kafker.markov.models import bigram_weights, bigrams
 
 
 @app.page("/generate/")

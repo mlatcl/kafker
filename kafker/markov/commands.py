@@ -2,7 +2,7 @@ import click
 import faust.cli
 
 from kafker.app import app
-from kafker.learning.models import new_texts
+from kafker.markov.models import new_texts
 
 
 @app.command(
