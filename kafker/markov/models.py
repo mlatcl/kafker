@@ -8,6 +8,4 @@ bigram_weights = app.GlobalTable("bigram_weights", value_type=int, default=int)
 personal_dictionary_rebuilds = app.topic(
     "personal_dictionary_rebuilds", internal=True, value_type=str
 )
-personal_dictionary = app.SetTable(
-    "personal_dictionary", value_type=str, default=set
-)
+personal_dictionary = app.SetTable("personal_dictionary", value_type=str, default=set)
