@@ -5,6 +5,9 @@ kafker-data
 # Local input files
 data/
 
+# vscode local files
+.vscode
+
 # NOTE(mrksr): Github's Python ignore file following below
 # Byte-compiled / optimized / DLL files
 __pycache__/
