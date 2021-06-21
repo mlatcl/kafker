@@ -38,10 +38,8 @@ async def rebuild_personal_weights(personal_dictionary_rebuilds):
     async for author in personal_dictionary_rebuilds.group_by(
         lambda x: x, name="by-author"
     ):
-        print(f"Rebuilding {author}")
         for post_id in posts_by_author[author]:
             post = posts.get(post_id.uid, None)
-            print(f"{post_id=} with {post=}")
             if post is not None:
                 text = post.text
                 words = text.split(" ")
