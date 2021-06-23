@@ -35,9 +35,10 @@ async def persist_bigrams(new_bigrams):
 
 @app.agent(personal_dictionary_rebuilds)
 async def rebuild_personal_weights(personal_dictionary_rebuilds):
-    async for author in personal_dictionary_rebuilds.group_by(
+    grouped_rebuilds = personal_dictionary_rebuilds.group_by(
         lambda x: x, name="by-author"
-    ):
+    )
+    async for author in grouped_rebuilds:
         for post_id in posts_by_author[author]:
             post = posts.get(post_id.uid, None)
             if post is not None:
