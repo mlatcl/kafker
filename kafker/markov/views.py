@@ -4,6 +4,8 @@ import random
 from kafker.app import app
 from kafker.markov.models import bigram_weights, bigrams, personal_dictionary
 
+PERSONAL_WORDS_WEIGHT = 10.0
+
 
 @app.page("/generate/{author}/")
 @app.table_route(table=personal_dictionary, match_info="author")
@@ -14,7 +16,7 @@ async def generate_post(web, request, author, length=50):
         while True:
             next_words = list(bigrams[current_word])
             next_weights = [
-                (10.0 if next_word in personal_words else 1.0)
+                (PERSONAL_WORDS_WEIGHT if next_word in personal_words else 1.0)
                 * bigram_weights[current_word, next_word]
                 for next_word in next_words
             ]
