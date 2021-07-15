@@ -33,8 +33,12 @@ async def persist_post(new_posts):
         posts[post.uid.uid] = post
         posts_by_author[post.author].add(post.uid)
 
+
+@app.agent(new_posts, sink=[timeline_rebuilds])
+async def update_timelines_after_new_post(new_posts):
+    async for post in new_posts.group_by(Post.author):
         for interested in (post.author, *followers[post.author]):
-            await timeline_rebuilds.send(value=interested)
+            yield interested
 
 
 @app.agent(timeline_rebuilds)
