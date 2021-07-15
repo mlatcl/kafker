@@ -29,7 +29,11 @@ async def process_active(follows):
         else:
             followings[active].discard(passive)
 
-        await timeline_rebuilds.send(value=active)
+
+@app.agent(follows, sink=[timeline_rebuilds])
+async def update_timelines_after_follow(follows):
+    async for follow in follows.group_by(Follow.active_author):
+        yield follow.active_author
 
 
 @app.agent(follows)
