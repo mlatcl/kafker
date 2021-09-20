@@ -1,11 +1,14 @@
 import faust
 
+address = 'bravenw.info'
+brokerAddress = "kafka://{}:9092".format(address)
+print("Broker address: ", brokerAddress)
 app = faust.App(
     "kafker",
     version=1,
     autodiscover=True,
     origin="kafker",
-    broker="kafka://localhost:9092",
+    broker=brokerAddress
 )
 
 
